@@ -52,7 +52,7 @@ app.post('/roll', (req, res) => {
   });
 
   const rhs = sumRolls(expressionValues);
-  const output = `You rolled *${rhs}* ${expressionValues.length > 0 ? '' : `\n>_Rolls:_ ${lhsOutput.join("+ ")}`}`;
+  const output = `You rolled *${rhs}* ${expressionValues.length === 0 ? '' : `\n>_Rolls:_ ${lhsOutput.join("+ ")}`}`;
 
   let data = {
     response_type: !!req.query.private ? 'ephemeral' : 'in_channel',
