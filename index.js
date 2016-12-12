@@ -1,5 +1,5 @@
 'use strict';
-import "isomorphic-fetch"
+require("isomorphic-fetch");
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
