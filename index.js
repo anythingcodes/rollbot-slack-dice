@@ -2,10 +2,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const Expression = require('./expression');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const server = app.listen(process.env.PORT, () => { console.log('Express server listening on port %d in %s mode', server.address().port,   app.settings.env);});
+const diceRegex = new RegExp(/^[\d+]?d\d+[\+|\-]?\d*$/);
 
 app.post('/roll', (req, res) => {
   const text = req.body.text;
@@ -23,6 +23,9 @@ app.post('/roll', (req, res) => {
   const lhs = []; // output for the left-hand side of the equation
   const expressionValues = segments.map(segment => {
     const rollFactors = segment.split("d");
+    console.log('==is dice roll?');
+    console.log(segment);
+    console.log(isDiceRoll(segment));
     if(segment.includes("d")) {
       if(segment.indexOf("d") === 0) {
         // first value is 1
@@ -72,4 +75,8 @@ function sumRolls(rollArr) {
   return rollArr.reduce((sum, number) => {
     return sum + parseInt(number);
   }, 0);
+}
+
+function isDiceRoll(val) {
+  return diceRegex.test(val);
 }

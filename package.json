@@ -1,7 +1,7 @@
 {
-  "name": "node-slash-command",
+  "name": "rollbot-slack-dice",
   "version": "0.0.0",
-  "description": "Node Slack slash command example",
+  "description": "Slack slash command dice roller",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BeepBoopHQ/node-slash-command.git"
+    "url": "https://github.com/anythingcodes/rollbot-slack-dice.git"
   },
   "keywords": [
     "slack",
     "slash",
     "command"
   ],
-  "author": "Brad Harris",
+  "author": "L. Shaw",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BeepBoopHQ/node-slash-command/issues"
+    "url": "https://github.com/anythingcodes/rollbot-slack-dice/issues"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
