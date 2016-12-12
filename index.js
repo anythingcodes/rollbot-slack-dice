@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // This runs every 5 minutes to prevent Heroku from making this app go to sleep
 function keepAlive() {
   fetch('http://rollbot-slack.herokuapp.com/')
-      .then(response => response.json())
+      .then(response => console.log('Successfully fetched from Heroku instance'))
       .catch(error => console.log('Error fetching from Heroku instance'));
 }
 
