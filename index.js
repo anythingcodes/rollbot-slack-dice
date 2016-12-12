@@ -2,11 +2,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const diceRegex = new RegExp(/^[\d+]?d\d+[\+|\-]?\d*$/);
+const diceRegex = new RegExp(/^[\+\-+]?[\d+]?d\d+[\+|\-]?\d*$/);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 // This runs every 5 minutes to prevent Heroku from making this app go to sleep
 function keepAlive() {
@@ -17,13 +16,12 @@ function keepAlive() {
 
 const server = app.listen(process.env.PORT, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
-  if(process.env.NODE_ENV === 'production') {
-    setInterval(keepAlive, 300000);
-  }
+  setInterval(keepAlive, 300000);
 });
 
 app.post('/roll', (req, res) => {
   const text = req.body.text;
+  const user_name = req.body.user_name;
   const error = false; // TODO: Error Detection
   
   if(error) {
@@ -70,11 +68,34 @@ app.post('/roll', (req, res) => {
   });
 
   const rhs = sumRolls(expressionValues);
-  const output = `You rolled *${rhs}* ${expressionValues.length === 0 ? '' : `\n>_Rolls:_ ${lhsOutput.join("+ ")}`}`;
 
   let data = {
     response_type: !!req.query.private ? 'ephemeral' : 'in_channel',
-    text: output
+    attachments: [
+      {
+        "fallback": "Required plain-text summary of the attachment.",
+        "color": "good", // TODO: Change color based on max and min roll values
+        "pretext": `@${user_name} rolled *${rhs}*`,
+        "fields": [
+      {
+        "title": "Dice",
+        "value": segments.join(" "),
+        "short": false
+      },
+      {
+        "title": "Rolls",
+        "value": lhsOutput.join("+ "),
+        "short": true
+      },
+      {
+        "title": "Result",
+        "value": rhs,
+        "short": true
+      }
+    ],
+        "mrkdwn_in": ["pretext"]
+  }
+  ]
   };
   res.json(data);
 });
