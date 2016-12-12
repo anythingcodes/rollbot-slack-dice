@@ -1,4 +1,5 @@
 'use strict';
+import "isomorphic-fetch"
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -9,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // This runs every 5 minutes to prevent Heroku from making this app go to sleep
 function keepAlive() {
-  fetch('http://rollbot-slack.herokuapp.com/roll')
+  fetch('http://rollbot-slack.herokuapp.com/rollheroku ')
       .then(response => response.json())
       .catch(error => console.log('Error fetching from Heroku instance'));
 }
