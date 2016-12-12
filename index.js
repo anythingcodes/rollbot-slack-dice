@@ -2,10 +2,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const diceRegex = new RegExp(/^[\d+]?d\d+[\+|\-]?\d*$/);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const server = app.listen(process.env.PORT, () => { console.log('Express server listening on port %d in %s mode', server.address().port,   app.settings.env);});
-const diceRegex = new RegExp(/^[\d+]?d\d+[\+|\-]?\d*$/);
+
+
+// This runs every 5 minutes to prevent Heroku from making this app go to sleep
+function keepAlive() {
+  fetch('http://rollbot-slack.herokuapp.com/')
+      .then(response => response.json())
+      .catch(error => console.log('Error fetching from Heroku instance'));
+}
+
+const server = app.listen(process.env.PORT, () => {
+  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+  if(process.env.NODE_ENV === 'production') {
+    setInterval(keepAlive, 300000);
+  }
+});
 
 app.post('/roll', (req, res) => {
   const text = req.body.text;
