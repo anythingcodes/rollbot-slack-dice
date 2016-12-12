@@ -1,6 +1,6 @@
 # rollbot-slack-dice
 
-A [Slack slash command](https://api.slack.com/slash-commands)written in Node.js for rolling dice in dice notation (e.g. `3d6 + 3`). Call with `/roll` to display results publicly or `/rollprivate` to keep results private.
+A [Slack slash command](https://api.slack.com/slash-commands) written in Node.js for rolling dice in dice notation (e.g. `3d6 + 3`). Call with `/roll` to display results publicly or `/rollprivate` to keep results private.
 
 ### _Instructions forthcoming — stay tuned!_
 
