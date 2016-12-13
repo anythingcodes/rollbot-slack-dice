@@ -2,9 +2,9 @@
   "name": "rollbot-slack-dice",
   "version": "0.0.0",
   "description": "Slack slash command dice roller",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "standard"
   },
   "repository": {
@@ -22,6 +22,7 @@
     "url": "https://github.com/anythingcodes/rollbot-slack-dice/issues"
   },
   "dependencies": {
+    "babel": "^6.5.2",
     "body-parser": "^1.15.2",
     "es6-promise": "^4.0.5",
     "express": "^4.14.0",
@@ -32,6 +33,7 @@
     "babel-eslint": "^6.1.2",
     "babel-preset-stage-2": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.18.0",
     "eslint": "^3.12.0",
     "standard": "^6.0.8"
   }
