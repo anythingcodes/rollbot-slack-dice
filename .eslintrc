@@ -1,6 +1,11 @@
 {
-  "parser": "babel-eslint",
+  "extends": "airbnb",
   "rules": {
-    "strict": 0
+    "comma-dangle": 0,
+    "comma-spacing": [1, {
+      "before": false,
+      "after": true
+    }],
+    "indent": [1, 4]
   }
 }
